@@ -1,7 +1,7 @@
 package main
 
 import (
-	riot_wrapper "ElderLab/riot-wrapper"
+	riotwrapper "ElderLab/riot-wrapper"
 	"encoding/json"
 	"fmt"
 	"github.com/tot0p/env"
@@ -16,7 +16,7 @@ func init() {
 
 func main() {
 	apiKey := env.Get("RIOT_API_KEY")
-	cliRiot := riot_wrapper.NewRiotClient(apiKey)
+	cliRiot := riotwrapper.NewRiotClient(apiKey)
 	r1, errs := cliRiot.GetChampionRotation()
 	if len(errs) > 0 {
 		panic(errs)
@@ -27,17 +27,13 @@ func main() {
 		panic(errs)
 	}
 	fmt.Println(r2)
-	var result map[string]interface{}
-	err := json.Unmarshal([]byte(r2), &result)
-	if err != nil {
-		panic(err)
-	}
-	r3, errs := cliRiot.GetSummonerByPUUID(result["puuid"].(string))
+	r3, errs := cliRiot.GetSummonerByPUUID(r2.Puuid)
 	if len(errs) > 0 {
-		panic(err)
+		panic(errs)
 	}
 	fmt.Println(r3)
-	err = json.Unmarshal([]byte(r3), &result)
+	var result map[string]interface{}
+	err := json.Unmarshal([]byte(r3), &result)
 	if err != nil {
 		panic(err)
 	}
@@ -46,4 +42,11 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r4)
+
+	r5, errs := cliRiot.GetMatchesIds(r2.Puuid)
+	if len(errs) > 0 {
+		panic(err)
+	}
+
+	fmt.Println(r5)
 }

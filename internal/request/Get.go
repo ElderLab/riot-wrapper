@@ -22,16 +22,25 @@ func (c *Client) Get(resource string, paramsURL []ParamURL) ([]byte, []error) {
 			comp++
 		}
 	}
-	request := fiber.Get(c.BaseURL + resource)
+	request := fiber.Get(c.baseURL + resource)
 	//request.Debug()
-	request.Set("X-Riot-Token", c.XRiotToken)
+	request.Set("X-Riot-Token", c.xRiotToken)
 
 	// Query parameters
 	AddQuery(request, paramsURL)
 
-	_, data, err := request.Bytes()
+	statusCode, data, err := request.Bytes()
+	//save the last status code
+	c.lastStatus = statusCode
 	if err != nil {
 		return nil, err
 	}
+
+	//check if the status code is not 200
+	if statusCode/100 != 2 {
+		//return the error message
+		return data, []error{NewStatusError(statusCode)}
+	}
+
 	return data, nil
 }
