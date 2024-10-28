@@ -14,7 +14,7 @@ type Account struct {
 
 // String is a function that returns the account in json format.
 func (a Account) String() string {
-	//print the account to json format formated with tabulation
+	//print the account to json format formatted with tabulation
 	b, err := json.MarshalIndent(a, "", "  ")
 	if err != nil {
 		panic(err)

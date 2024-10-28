@@ -17,11 +17,11 @@ func init() {
 func main() {
 	apiKey := env.Get("RIOT_API_KEY")
 	cliRiot := riotwrapper.NewRiotClient(apiKey)
-	r1, errs := cliRiot.GetChampionRotation()
-	if len(errs) > 0 {
-		panic(errs)
-	}
-	fmt.Println(r1)
+	//r1, errs := cliRiot.GetChampionRotation()
+	//if len(errs) > 0 {
+	//	panic(errs)
+	//}
+	//fmt.Println(r1)
 	r2, errs := cliRiot.GetAccountByRiotId("Sambre", "3005")
 	if len(errs) > 0 {
 		panic(errs)
@@ -32,21 +32,30 @@ func main() {
 		panic(errs)
 	}
 	fmt.Println(r3)
-	var result map[string]interface{}
-	err := json.Unmarshal([]byte(r3), &result)
-	if err != nil {
-		panic(err)
-	}
-	r4, errs := cliRiot.GetSummonerByAccountId(result["accountId"].(string))
+
+	r4, errs := cliRiot.GetSummonerByAccountId(r3.AccountId)
 	if len(errs) > 0 {
-		panic(err)
+		panic(errs)
 	}
 	fmt.Println(r4)
 
 	r5, errs := cliRiot.GetMatchesIds(r2.Puuid)
 	if len(errs) > 0 {
+		panic(errs)
+	}
+	fmt.Println(r5)
+
+	var result2 []string
+	err := json.Unmarshal([]byte(r5), &result2)
+	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(r5)
+	r6, errs := cliRiot.GetMatchById(result2[0])
+	if len(errs) > 0 {
+		panic(err)
+	}
+
+	fmt.Println(r6)
+
 }
