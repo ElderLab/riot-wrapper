@@ -26,15 +26,20 @@ func (cli *RiotClient) GetMatchesIds(puuid string) (*response.MatchesIds, []erro
 }
 
 // GetMatchById is a function that returns a match details by match ID.
-func (cli *RiotClient) GetMatchById(matchId string) (string, []error) {
-	result, err := cli.riotClient.Get("/lol/match/v5/matches/:matchId", []request.ParamURL{
+func (cli *RiotClient) GetMatchById(matchId string) (*response.Match, []error) {
+	result, errs := cli.riotClient.Get("/lol/match/v5/matches/:matchId", []request.ParamURL{
 		{
 			Key:   "matchId",
 			Value: matchId,
 		},
 	})
-	if err != nil {
-		return "", err
+	if errs != nil {
+		return nil, errs
 	}
-	return string(result), nil
+	var match response.Match
+	err := json.Unmarshal(result, &match)
+	if err != nil {
+		return nil, []error{err}
+	}
+	return &match, nil
 }
