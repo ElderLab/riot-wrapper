@@ -2,7 +2,6 @@ package main
 
 import (
 	riotwrapper "ElderLab/riot-wrapper"
-	"encoding/json"
 	"fmt"
 	"github.com/tot0p/env"
 )
@@ -45,15 +44,9 @@ func main() {
 	}
 	fmt.Println(r5)
 
-	var result2 []string
-	err := json.Unmarshal([]byte(r5), &result2)
-	if err != nil {
-		panic(err)
-	}
-
-	r6, errs := cliRiot.GetMatchById(result2[0])
+	r6, errs := cliRiot.GetMatchById((*r5)[0])
 	if len(errs) > 0 {
-		panic(err)
+		panic(errs)
 	}
 
 	fmt.Println(r6)

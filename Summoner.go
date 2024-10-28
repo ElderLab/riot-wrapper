@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 )
 
+// Summoner is a struct that represents the summoner riot.
 type Summoner struct {
 	Id            string `json:"id"`
 	AccountId     string `json:"accountId"`
@@ -14,6 +15,7 @@ type Summoner struct {
 	SummonerLevel int    `json:"summonerLevel"`
 }
 
+// String is a function that returns the summoner in json format.
 func (s Summoner) String() string {
 	b, err := json.MarshalIndent(s, "", "  ")
 	if err != nil {
