@@ -2,23 +2,12 @@ package riot_wrapper
 
 import (
 	"ElderLab/riot-wrapper/internal/request"
+	"ElderLab/riot-wrapper/models/response"
 	"encoding/json"
 )
 
-// MatchesIds is a struct that represents a list of match IDs.
-type MatchesIds []string
-
-// String is a function that returns the matches IDs in json format.
-func (m MatchesIds) String() string {
-	b, err := json.MarshalIndent(m, "", "  ")
-	if err != nil {
-		panic(err)
-	}
-	return string(b)
-}
-
 // GetMatchesIds is a function that returns a list of match IDs by PUUID.
-func (cli *RiotClient) GetMatchesIds(puuid string) (*MatchesIds, []error) {
+func (cli *RiotClient) GetMatchesIds(puuid string) (*response.MatchesIds, []error) {
 	result, errs := cli.riotClient.Get("/lol/match/v5/matches/by-puuid/:puuid/ids", []request.ParamURL{
 		{
 			Key:   "puuid",
@@ -28,7 +17,7 @@ func (cli *RiotClient) GetMatchesIds(puuid string) (*MatchesIds, []error) {
 	if errs != nil {
 		return nil, errs
 	}
-	var matchesIds MatchesIds
+	var matchesIds response.MatchesIds
 	err := json.Unmarshal(result, &matchesIds)
 	if err != nil {
 		return nil, []error{err}

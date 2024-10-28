@@ -2,30 +2,12 @@ package riot_wrapper
 
 import (
 	"ElderLab/riot-wrapper/internal/request"
+	"ElderLab/riot-wrapper/models/response"
 	"encoding/json"
 )
 
-// Summoner is a struct that represents the summoner riot.
-type Summoner struct {
-	Id            string `json:"id"`
-	AccountId     string `json:"accountId"`
-	Puuid         string `json:"puuid"`
-	ProfileIconId int    `json:"profileIconId"`
-	RevisionDate  int    `json:"revisionDate"`
-	SummonerLevel int    `json:"summonerLevel"`
-}
-
-// String is a function that returns the summoner in json format.
-func (s Summoner) String() string {
-	b, err := json.MarshalIndent(s, "", "  ")
-	if err != nil {
-		panic(err)
-	}
-	return string(b)
-}
-
 // GetSummonerByPUUID is a function that returns a summoner by PUUID.
-func (cli *RiotClient) GetSummonerByPUUID(puuid string) (*Summoner, []error) {
+func (cli *RiotClient) GetSummonerByPUUID(puuid string) (*response.Summoner, []error) {
 	result, errs := cli.lolClient.Get("/lol/summoner/v4/summoners/by-puuid/:puuid", []request.ParamURL{
 		{
 			Key:   "puuid",
@@ -35,7 +17,7 @@ func (cli *RiotClient) GetSummonerByPUUID(puuid string) (*Summoner, []error) {
 	if errs != nil {
 		return nil, errs
 	}
-	var summoner Summoner
+	var summoner response.Summoner
 	err := json.Unmarshal(result, &summoner)
 	if err != nil {
 		return nil, []error{err}
@@ -44,7 +26,7 @@ func (cli *RiotClient) GetSummonerByPUUID(puuid string) (*Summoner, []error) {
 }
 
 // GetSummonerByAccountId is a function that returns a summoner by AccountId.
-func (cli *RiotClient) GetSummonerByAccountId(accountId string) (*Summoner, []error) {
+func (cli *RiotClient) GetSummonerByAccountId(accountId string) (*response.Summoner, []error) {
 	result, errs := cli.lolClient.Get("/lol/summoner/v4/summoners/by-account/:accountId", []request.ParamURL{
 		{
 			Key:   "accountId",
@@ -54,7 +36,7 @@ func (cli *RiotClient) GetSummonerByAccountId(accountId string) (*Summoner, []er
 	if errs != nil {
 		return nil, errs
 	}
-	var summoner Summoner
+	var summoner response.Summoner
 	err := json.Unmarshal(result, &summoner)
 	if err != nil {
 		return nil, []error{err}
