@@ -1,8 +1,8 @@
 package main
 
 import (
-	riotwrapper "ElderLab/riot-wrapper"
 	"fmt"
+	riotwrapper "github.com/ElderLab/riot-wrapper"
 	"github.com/tot0p/env"
 )
 

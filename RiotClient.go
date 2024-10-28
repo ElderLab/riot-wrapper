@@ -1,6 +1,6 @@
 package riot_wrapper
 
-import "ElderLab/riot-wrapper/internal/request"
+import "github.com/ElderLab/riot-wrapper/internal/request"
 
 // RiotClient is a struct that contains the RiotClient.
 type RiotClient struct {

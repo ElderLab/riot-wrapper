@@ -1,9 +1,9 @@
 package riot_wrapper
 
 import (
-	"ElderLab/riot-wrapper/internal/request"
-	"ElderLab/riot-wrapper/models/response"
 	"encoding/json"
+	"github.com/ElderLab/riot-wrapper/internal/request"
+	"github.com/ElderLab/riot-wrapper/models/response"
 )
 
 // GetSummonerByPUUID is a function that returns a summoner by PUUID.

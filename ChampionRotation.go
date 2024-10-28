@@ -1,6 +1,6 @@
 package riot_wrapper
 
-import "ElderLab/riot-wrapper/internal/request"
+import "github.com/ElderLab/riot-wrapper/internal/request"
 
 // GetChampionRotation is a function that returns the free champion rotation for the current week.
 func (cli *RiotClient) GetChampionRotation() (string, []error) {

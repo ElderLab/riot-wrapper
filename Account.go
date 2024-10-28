@@ -1,9 +1,9 @@
 package riot_wrapper
 
 import (
-	"ElderLab/riot-wrapper/internal/request"
-	"ElderLab/riot-wrapper/models/response"
 	"encoding/json"
+	"github.com/ElderLab/riot-wrapper/internal/request"
+	"github.com/ElderLab/riot-wrapper/models/response"
 )
 
 // GetAccountByRiotId is a function that returns the account ID for a given gameName and tagLine.

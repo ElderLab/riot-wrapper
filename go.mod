@@ -1,4 +1,4 @@
-module ElderLab/riot-wrapper
+module github.com/ElderLab/riot-wrapper
 
 go 1.23.2
 
