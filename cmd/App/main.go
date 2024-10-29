@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	riotwrapper "github.com/ElderLab/riot-wrapper"
+	"github.com/ElderLab/riot-wrapper/models/opts"
 	"github.com/tot0p/env"
 )
 
@@ -57,5 +58,15 @@ func main() {
 	}
 
 	fmt.Println(r7)
+
+	r8, errs := cliRiot.GetMatchesIdsWithOpts(r2.Puuid, opts.MatchesIdsOpts{
+		Count: 100,
+	})
+
+	if len(errs) > 0 {
+		panic(errs)
+	}
+
+	fmt.Println(r8)
 
 }

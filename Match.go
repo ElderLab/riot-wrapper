@@ -3,6 +3,7 @@ package riot_wrapper
 import (
 	"encoding/json"
 	"github.com/ElderLab/riot-wrapper/internal/request"
+	"github.com/ElderLab/riot-wrapper/models/opts"
 	"github.com/ElderLab/riot-wrapper/models/response"
 )
 
@@ -14,6 +15,25 @@ func (cli *RiotClient) GetMatchesIds(puuid string) (*response.MatchesIds, []erro
 			Value: puuid,
 		},
 	})
+	if errs != nil {
+		return nil, errs
+	}
+	var matchesIds response.MatchesIds
+	err := json.Unmarshal(result, &matchesIds)
+	if err != nil {
+		return nil, []error{err}
+	}
+	return &matchesIds, nil
+}
+
+// GetMatchesIdsWithOpts is a function that returns a list of match IDs by PUUID with options.
+func (cli *RiotClient) GetMatchesIdsWithOpts(puuid string, opts opts.MatchesIdsOpts) (*response.MatchesIds, []error) {
+	params := request.StructToListOfParamURL(opts)
+	params = append(params, request.ParamURL{
+		Key:   "puuid",
+		Value: puuid,
+	})
+	result, errs := cli.riotClient.Get("/lol/match/v5/matches/by-puuid/:puuid/ids", params)
 	if errs != nil {
 		return nil, errs
 	}
