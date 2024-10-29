@@ -43,3 +43,22 @@ func (cli *RiotClient) GetMatchById(matchId string) (*response.Match, []error) {
 	}
 	return &match, nil
 }
+
+// GetMatchTimelineById is a function that returns a match timeline by match ID.
+func (cli *RiotClient) GetMatchTimelineById(matchId string) (*response.MatchTimeline, []error) {
+	result, errs := cli.riotClient.Get("/lol/match/v5/matches/:matchId/timeline", []request.ParamURL{
+		{
+			Key:   "matchId",
+			Value: matchId,
+		},
+	})
+	if errs != nil {
+		return nil, errs
+	}
+	var matchTimeline response.MatchTimeline
+	err := json.Unmarshal(result, &matchTimeline)
+	if err != nil {
+		return nil, []error{err}
+	}
+	return &matchTimeline, nil
+}

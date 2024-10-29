@@ -51,4 +51,11 @@ func main() {
 
 	fmt.Println(r6)
 
+	r7, errs := cliRiot.GetMatchTimelineById((*r5)[0])
+	if len(errs) > 0 {
+		panic(errs)
+	}
+
+	fmt.Println(r7)
+
 }
