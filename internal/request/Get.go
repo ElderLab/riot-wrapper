@@ -2,6 +2,7 @@ package request
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"net/url"
 	"strings"
 )
 
@@ -11,7 +12,7 @@ func (c *Client) Get(resource string, paramsURL []ParamURL) ([]byte, []error) {
 		idToDelete := make([]int, 0)
 		for i, param := range paramsURL {
 			ok := strings.Contains(resource, ":"+param.Key)
-			resource = strings.Replace(resource, ":"+param.Key, param.Value, -1)
+			resource = strings.Replace(resource, ":"+param.Key, url.QueryEscape(param.Value), -1)
 			if ok {
 				idToDelete = append(idToDelete, i)
 			}

@@ -47,7 +47,7 @@ type Match struct {
 				AlliedJungleMonsterKills                  int     `json:"alliedJungleMonsterKills"`
 				BaronTakedowns                            int     `json:"baronTakedowns"`
 				BlastConeOppositeOpponentCount            int     `json:"blastConeOppositeOpponentCount"`
-				BountyGold                                int     `json:"bountyGold"`
+				BountyGold                                float64 `json:"bountyGold"`
 				BuffsStolen                               int     `json:"buffsStolen"`
 				CompleteSupportQuestInTime                int     `json:"completeSupportQuestInTime"`
 				ControlWardsPlaced                        int     `json:"controlWardsPlaced"`
