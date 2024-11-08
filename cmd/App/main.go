@@ -22,49 +22,49 @@ func main() {
 	//	panic(errs)
 	//}
 	//fmt.Println(r1)
-	r2, errs := cliRiot.GetAccountByRiotId("Sambre", "3005")
-	if len(errs) > 0 {
-		panic(errs)
+	r2, err := cliRiot.GetAccountByRiotId("Sambre", "3005")
+	if err != nil {
+		panic(err)
 	}
 	fmt.Println(r2)
-	r3, errs := cliRiot.GetSummonerByPUUID(r2.Puuid)
-	if len(errs) > 0 {
-		panic(errs)
+	r3, err := cliRiot.GetSummonerByPUUID(r2.Puuid)
+	if err != nil {
+		panic(err)
 	}
 	fmt.Println(r3)
 
-	r4, errs := cliRiot.GetSummonerByAccountId(r3.AccountId)
-	if len(errs) > 0 {
-		panic(errs)
+	r4, err := cliRiot.GetSummonerByAccountId(r3.AccountId)
+	if err != nil {
+		panic(err)
 	}
 	fmt.Println(r4)
 
-	r5, errs := cliRiot.GetMatchesIds(r2.Puuid)
-	if len(errs) > 0 {
-		panic(errs)
+	r5, err := cliRiot.GetMatchesIds(r2.Puuid)
+	if err != nil {
+		panic(err)
 	}
 	fmt.Println(r5)
 
-	r6, errs := cliRiot.GetMatchById((*r5)[0])
-	if len(errs) > 0 {
-		panic(errs)
+	r6, err := cliRiot.GetMatchById((*r5)[0])
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Println(r6)
 
-	r7, errs := cliRiot.GetMatchTimelineById((*r5)[0])
-	if len(errs) > 0 {
-		panic(errs)
+	r7, err := cliRiot.GetMatchTimelineById((*r5)[0])
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Println(r7)
 
-	r8, errs := cliRiot.GetMatchesIdsWithOpts(r2.Puuid, opts.MatchesIdsOpts{
+	r8, err := cliRiot.GetMatchesIdsWithOpts(r2.Puuid, opts.MatchesIdsOpts{
 		Count: 100,
 	})
 
-	if len(errs) > 0 {
-		panic(errs)
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Println(r8)
