@@ -28,7 +28,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r2)
-
+	
 	r3, err := cliRiot.GetSummonerByPUUID(r2.Puuid)
 	if err != nil {
 		panic(err)
@@ -154,4 +154,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r22)
+
+	r23, err := cliRiot.GetChallengesPlayerProgression(r2.Puuid)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r23)
 }

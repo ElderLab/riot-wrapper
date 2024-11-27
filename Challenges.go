@@ -134,3 +134,21 @@ func (cli *RiotClient) GetChallengesLeaderboardsWithOpts(challengeId int, level 
 	}
 	return &challengesLeaderboards, nil
 }
+
+func (cli *RiotClient) GetChallengesPlayerProgression(puuid string) (*response.ChallengesProgression, error) {
+	result, err := cli.lolClient.Get("/lol/challenges/v1/player-data/:puuid", []request.ParamURL{
+		{
+			Key:   "puuid",
+			Value: puuid,
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var challengesProgression response.ChallengesProgression
+	err = json.Unmarshal(result, &challengesProgression)
+	if err != nil {
+		return nil, err
+	}
+	return &challengesProgression, nil
+}
