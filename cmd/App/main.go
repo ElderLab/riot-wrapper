@@ -44,29 +44,27 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r5)
-
 	r6, err := cliRiot.GetMatchById((*r5)[0])
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(r6)
-
 	r7, err := cliRiot.GetMatchTimelineById((*r5)[0])
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(r7)
-
 	r8, err := cliRiot.GetMatchesIdsWithOpts(r2.Puuid, opts.MatchesIdsOpts{
 		Count: 100,
 	})
-
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(r8)
 
+	r9, err := cliRiot.GetChallengerByQueue(riotwrapper.RankedSolo5x5)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r9)
 }
