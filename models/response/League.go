@@ -2,8 +2,8 @@ package response
 
 import "encoding/json"
 
-// ChallengerLeague is a struct that contains the response from the GetChallengerLeague function.
-type ChallengerLeague struct {
+// League is a struct that represents a tier league.
+type League struct {
 	Tier     string `json:"tier"`
 	LeagueId string `json:"leagueId"`
 	Queue    string `json:"queue"`
@@ -21,8 +21,8 @@ type ChallengerLeague struct {
 	} `json:"entries"`
 }
 
-// String is a function that returns the challenger league in json format.
-func (c ChallengerLeague) String() string {
+// String is a function that returns  the league in json format.
+func (c League) String() string {
 	b, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {
 		panic(err)

@@ -79,4 +79,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r11)
+
+	r12, err := cliRiot.GetGrandmasterLeagueByQueue(riotwrapper.RankedSolo5x5)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r12)
 }
