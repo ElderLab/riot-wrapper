@@ -34,7 +34,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r3)
-
+	
 	r4, err := cliRiot.GetSummonerByAccountId(r3.AccountId)
 	if err != nil {
 		panic(err)
@@ -166,4 +166,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r24)
+
+	r25, err := cliRiot.GetActiveGame(r2.Puuid)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r25)
 }
