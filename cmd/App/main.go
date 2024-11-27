@@ -22,11 +22,13 @@ func main() {
 	//	panic(errs)
 	//}
 	//fmt.Println(r1)
+
 	r2, err := cliRiot.GetAccountByRiotId("Sambre", "3005")
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(r2)
+
 	r3, err := cliRiot.GetSummonerByPUUID(r2.Puuid)
 	if err != nil {
 		panic(err)
@@ -44,16 +46,19 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r5)
+
 	r6, err := cliRiot.GetMatchById((*r5)[0])
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(r6)
+
 	r7, err := cliRiot.GetMatchTimelineById((*r5)[0])
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(r7)
+
 	r8, err := cliRiot.GetMatchesIdsWithOpts(r2.Puuid, opts.MatchesIdsOpts{
 		Count: 100,
 	})
@@ -105,4 +110,22 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r15)
+
+	r16, err := cliRiot.GetChallengesConfig()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r16)
+
+	r17, err := cliRiot.GetChallengesPercentiles()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r17)
+
+	r18, err := cliRiot.GetChallengesPercentilesById(101100)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r18)
 }
