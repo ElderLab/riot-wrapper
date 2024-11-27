@@ -50,6 +50,25 @@ func (cli *RiotClient) GetChampionMasteryById(puuid string, championId int) (*re
 	return &championMastery, nil
 }
 
+// GetChampionMastery is a function that returns the champion mastery of a summoner by PUUID.
+func (cli *RiotClient) GetChampionMastery(puuid string) (*[]response.ChampionMastery, error) {
+	result, err := cli.lolClient.Get("/lol/champion-mastery/v4/champion-masteries/by-puuid/:puuid/top", []request.ParamURL{
+		{
+			Key:   "puuid",
+			Value: puuid,
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var championMastery []response.ChampionMastery
+	err = json.Unmarshal(result, &championMastery)
+	if err != nil {
+		return nil, err
+	}
+	return &championMastery, nil
+}
+
 // GetChampionMasteryWithOpts is a function that returns the champion mastery of a summoner by PUUID with options.
 func (cli *RiotClient) GetChampionMasteryWithOpts(puuid string, opts opts.ChampionMasteryOpts) (*[]response.ChampionMastery, error) {
 	result, err := cli.lolClient.Get("/lol/champion-mastery/v4/champion-masteries/by-puuid/:puuid/top", []request.ParamURL{
