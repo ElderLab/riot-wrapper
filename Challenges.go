@@ -21,6 +21,25 @@ func (cli *RiotClient) GetChallengesConfig() (*[]response.Challenges, error) {
 	return &challenges, nil
 }
 
+// GetChallengesConfigById returns the challenges configuration by ID
+func (cli *RiotClient) GetChallengesConfigById(id int) (*response.Challenges, error) {
+	result, err := cli.lolClient.Get("/lol/challenges/v1/challenges/:id/config", []request.ParamURL{
+		{
+			Key:   "id",
+			Value: strconv.Itoa(id),
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var challenges response.Challenges
+	err = json.Unmarshal(result, &challenges)
+	if err != nil {
+		return nil, err
+	}
+	return &challenges, nil
+}
+
 // GetChallengesPercentiles returns all challenges percentiles
 func (cli *RiotClient) GetChallengesPercentiles() (*response.AllChallengesPercentiles, error) {
 	result, err := cli.lolClient.Get("/lol/challenges/v1/challenges/percentiles", []request.ParamURL{})

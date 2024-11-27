@@ -128,4 +128,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r18)
+
+	r19, err := cliRiot.GetChallengesConfigById(101100)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r19)
 }
