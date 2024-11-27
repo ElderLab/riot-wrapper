@@ -3,6 +3,7 @@ package riot_wrapper
 import (
 	"encoding/json"
 	"github.com/ElderLab/riot-wrapper/internal/request"
+	"github.com/ElderLab/riot-wrapper/models/opts"
 	"github.com/ElderLab/riot-wrapper/models/response"
 	"strconv"
 )
@@ -42,6 +43,29 @@ func (cli *RiotClient) GetChampionMasteryById(puuid string, championId int) (*re
 		return nil, err
 	}
 	var championMastery response.ChampionMastery
+	err = json.Unmarshal(result, &championMastery)
+	if err != nil {
+		return nil, err
+	}
+	return &championMastery, nil
+}
+
+// GetChampionMasteryWithOpts is a function that returns the champion mastery of a summoner by PUUID with options.
+func (cli *RiotClient) GetChampionMasteryWithOpts(puuid string, opts opts.ChampionMasteryOpts) (*[]response.ChampionMastery, error) {
+	result, err := cli.lolClient.Get("/lol/champion-mastery/v4/champion-masteries/by-puuid/:puuid/top", []request.ParamURL{
+		{
+			Key:   "puuid",
+			Value: puuid,
+		},
+		{
+			Key:   "count",
+			Value: strconv.Itoa(opts.Count),
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var championMastery []response.ChampionMastery
 	err = json.Unmarshal(result, &championMastery)
 	if err != nil {
 		return nil, err

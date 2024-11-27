@@ -85,4 +85,12 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r12)
+
+	r13, err := cliRiot.GetChampionMasteryWithOpts(r2.Puuid, opts.ChampionMasteryOpts{
+		Count: 5,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r13)
 }
