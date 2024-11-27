@@ -62,7 +62,7 @@ func main() {
 	}
 	fmt.Println(r8)
 
-	r9, err := cliRiot.GetChallengerByQueue(riotwrapper.RankedSolo5x5)
+	r9, err := cliRiot.GetChallengerLeagueByQueue(riotwrapper.RankedSolo5x5)
 	if err != nil {
 		panic(err)
 	}
