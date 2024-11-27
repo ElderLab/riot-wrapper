@@ -2,6 +2,7 @@ package response
 
 import "encoding/json"
 
+// PlayerRank is a struct that represents the player rank.
 type PlayerRank struct {
 	LeagueId     string `json:"leagueId"`
 	QueueType    string `json:"queueType"`
