@@ -3,8 +3,20 @@ package riot_wrapper
 import (
 	"encoding/json"
 	"github.com/ElderLab/riot-wrapper/internal/request"
+	"github.com/ElderLab/riot-wrapper/models/opts"
 	"github.com/ElderLab/riot-wrapper/models/response"
 	"strconv"
+)
+
+type rank string
+
+const (
+	// MASTER is a rank type
+	MASTER rank = "MASTER"
+	// GRANDMASTER is a rank type
+	GRANDMASTER rank = "GRANDMASTER"
+	// CHALLENGER is a rank type
+	CHALLENGER rank = "CHALLENGER"
 )
 
 // GetChallengesConfig returns the challenges configuration
@@ -71,4 +83,54 @@ func (cli *RiotClient) GetChallengesPercentilesById(challengeId int) (*response.
 		return nil, err
 	}
 	return &challengesPercentiles, nil
+}
+
+// GetChallengesLeaderboards returns the challenges leaderboards
+func (cli *RiotClient) GetChallengesLeaderboards(challengeId int, level rank) (*[]response.ChallengesLeaderboards, error) {
+	result, err := cli.lolClient.Get("/lol/challenges/v1/challenges/:challengeId/leaderboards/by-level/:level", []request.ParamURL{
+		{
+			Key:   "challengeId",
+			Value: strconv.Itoa(challengeId),
+		},
+		{
+			Key:   "level",
+			Value: string(level),
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var challengesLeaderboards []response.ChallengesLeaderboards
+	err = json.Unmarshal(result, &challengesLeaderboards)
+	if err != nil {
+		return nil, err
+	}
+	return &challengesLeaderboards, nil
+}
+
+// GetChallengesLeaderboardsWithOpts returns the challenges leaderboards with options
+func (cli *RiotClient) GetChallengesLeaderboardsWithOpts(challengeId int, level rank, opts opts.ChallengesLeaderboardsOpts) (*[]response.ChallengesLeaderboards, error) {
+	result, err := cli.lolClient.Get("/lol/challenges/v1/challenges/:challengeId/leaderboards/by-level/:level", []request.ParamURL{
+		{
+			Key:   "challengeId",
+			Value: strconv.Itoa(challengeId),
+		},
+		{
+			Key:   "level",
+			Value: string(level),
+		},
+		{
+			Key:   "limit",
+			Value: strconv.Itoa(opts.Limit),
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var challengesLeaderboards []response.ChallengesLeaderboards
+	err = json.Unmarshal(result, &challengesLeaderboards)
+	if err != nil {
+		return nil, err
+	}
+	return &challengesLeaderboards, nil
 }

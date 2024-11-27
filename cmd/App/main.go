@@ -134,4 +134,18 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r19)
+
+	r20, err := cliRiot.GetChallengesLeaderboards(0, riotwrapper.MASTER)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r20)
+
+	r21, err := cliRiot.GetChallengesLeaderboardsWithOpts(0, riotwrapper.GRANDMASTER, opts.ChallengesLeaderboardsOpts{
+		Limit: 10,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r21)
 }
