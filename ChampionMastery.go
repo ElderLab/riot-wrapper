@@ -72,3 +72,21 @@ func (cli *RiotClient) GetChampionMasteryWithOpts(puuid string, opts opts.Champi
 	}
 	return &championMastery, nil
 }
+
+// GetChampionMasteryScore is a function that returns the champion mastery score of a summoner by PUUID.
+func (cli *RiotClient) GetChampionMasteryScore(puuid string) (int, error) {
+	result, err := cli.lolClient.Get("/lol/champion-mastery/v4/scores/by-puuid/:puuid", []request.ParamURL{
+		{
+			Key:   "puuid",
+			Value: puuid,
+		},
+	})
+	if err != nil {
+		return 0, err
+	}
+	score, err := strconv.Atoi(string(result))
+	if err != nil {
+		return 0, err
+	}
+	return score, nil
+}

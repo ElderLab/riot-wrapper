@@ -99,4 +99,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r14)
+
+	r15, err := cliRiot.GetChampionMasteryScore(r2.Puuid)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r15)
 }
