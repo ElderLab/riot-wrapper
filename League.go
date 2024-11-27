@@ -35,3 +35,18 @@ func (cli *RiotClient) GetGrandmasterLeagueByQueue(queue queue) (*response.Leagu
 	}
 	return &grandmasterLeague, nil
 }
+
+// GetMasterLeagueByQueue is a function that returns the master league for a given queue.
+func (cli *RiotClient) GetMasterLeagueByQueue(queue queue) (*response.League, error) {
+	result, err := cli.lolClient.Get("/lol/league/v4/masterleagues/by-queue/"+string(queue), []request.ParamURL{})
+	if err != nil {
+		return nil, err
+	}
+
+	var masterLeague response.League
+	err = json.Unmarshal(result, &masterLeague)
+	if err != nil {
+		return nil, err
+	}
+	return &masterLeague, nil
+}

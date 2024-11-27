@@ -93,4 +93,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(r13)
+
+	r14, err := cliRiot.GetMasterLeagueByQueue(riotwrapper.RankedSolo5x5)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(r14)
 }
