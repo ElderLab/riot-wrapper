@@ -2,6 +2,8 @@ package errors
 
 import "strconv"
 
+var ErrStatus = NewStatusError(0)
+
 // NewStatusError is a function that returns a new StatusError.
 func NewStatusError(status int) *StatusError {
 	return &StatusError{status: status}

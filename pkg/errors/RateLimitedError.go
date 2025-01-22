@@ -1,5 +1,7 @@
 package errors
 
+var ErrRateLimited = NewRateLimitedError()
+
 // NewRateLimitedError is a function that returns a new RateLimitedError.
 func NewRateLimitedError() *RateLimitedError {
 	return &RateLimitedError{}
