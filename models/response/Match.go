@@ -70,7 +70,7 @@ type Match struct {
 				EpicMonsterKillsWithin30SecondsOfSpawn    int     `json:"epicMonsterKillsWithin30SecondsOfSpawn"`
 				EpicMonsterSteals                         int     `json:"epicMonsterSteals"`
 				EpicMonsterStolenWithoutSmite             int     `json:"epicMonsterStolenWithoutSmite"`
-				FirstTurretKilled                         int     `json:"firstTurretKilled"`
+				FirstTurretKilled                         float64 `json:"firstTurretKilled"`
 				FistBumpParticipation                     int     `json:"fistBumpParticipation"`
 				FlawlessAces                              int     `json:"flawlessAces"`
 				FullTeamTakedown                          int     `json:"fullTeamTakedown"`
