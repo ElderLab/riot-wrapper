@@ -332,6 +332,10 @@ type Match struct {
 				PickTurn   int `json:"pickTurn"`
 			} `json:"bans"`
 			Objectives struct {
+				Atakhan struct {
+					First bool `json:"first"`
+					Kills int  `json:"kills"`
+				} `json:"atakhan"`
 				Baron struct {
 					First bool `json:"first"`
 					Kills int  `json:"kills"`
