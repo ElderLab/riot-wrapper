@@ -1,6 +1,7 @@
 package request
 
 import (
+	"github.com/ElderLab/riot-wrapper/pkg/errors"
 	"github.com/gofiber/fiber/v2"
 	"net/url"
 	"strings"
@@ -45,10 +46,10 @@ func (c *Client) Get(resource string, paramsURL []ParamURL) ([]byte, error) {
 		// if the client was rate limited
 		if statusCode == 429 {
 			//return the error message
-			return data, NewRateLimitedError()
+			return data, errors.NewRateLimitedError()
 		}
 		//return the error message
-		return data, NewStatusError(statusCode)
+		return data, errors.NewStatusError(statusCode)
 	}
 
 	return data, nil

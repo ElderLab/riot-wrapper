@@ -1,4 +1,4 @@
-package request
+package errors
 
 // NewRateLimitedError is a function that returns a new RateLimitedError.
 func NewRateLimitedError() *RateLimitedError {

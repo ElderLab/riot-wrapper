@@ -1,4 +1,4 @@
-package request
+package errors
 
 import "strconv"
 
