@@ -13,6 +13,6 @@ type StatusError struct {
 }
 
 // Error is a function that returns the status.
-func (e *StatusError) Error() string {
+func (e StatusError) Error() string {
 	return "Status : " + strconv.Itoa(e.status)
 }

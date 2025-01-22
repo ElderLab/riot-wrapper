@@ -42,6 +42,11 @@ func (c *Client) Get(resource string, paramsURL []ParamURL) ([]byte, error) {
 
 	//check if the status code is not 200
 	if statusCode/100 != 2 {
+		// if the client was rate limited
+		if statusCode == 429 {
+			//return the error message
+			return data, NewRateLimitedError()
+		}
 		//return the error message
 		return data, NewStatusError(statusCode)
 	}
