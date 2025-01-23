@@ -28,3 +28,22 @@ func (cli *RiotClient) GetAccountByRiotId(gameName, tagLine string) (*response.A
 	}
 	return &account, nil
 }
+
+// GetAccountByPuuid is a function that returns the account ID for a given PUUID.
+func (cli *RiotClient) GetAccountByPuuid(puuid string) (*response.Account, error) {
+	result, err := cli.riotClient.Get("/riot/account/v1/accounts/by-puuid/:puuid", []request.ParamURL{
+		{
+			Key:   "puuid",
+			Value: puuid,
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+	var account response.Account
+	err = json.Unmarshal(result, &account)
+	if err != nil {
+		return nil, err
+	}
+	return &account, nil
+}
