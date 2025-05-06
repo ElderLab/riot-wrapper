@@ -220,18 +220,18 @@ type Match struct {
 			MagicDamageDealtToChampions int    `json:"magicDamageDealtToChampions"`
 			MagicDamageTaken            int    `json:"magicDamageTaken"`
 			Missions                    struct {
-				PlayerScore0  int `json:"playerScore0"`
-				PlayerScore1  int `json:"playerScore1"`
-				PlayerScore2  int `json:"playerScore2"`
-				PlayerScore3  int `json:"playerScore3"`
-				PlayerScore4  int `json:"playerScore4"`
-				PlayerScore5  int `json:"playerScore5"`
-				PlayerScore6  int `json:"playerScore6"`
-				PlayerScore7  int `json:"playerScore7"`
-				PlayerScore8  int `json:"playerScore8"`
-				PlayerScore9  int `json:"playerScore9"`
-				PlayerScore10 int `json:"playerScore10"`
-				PlayerScore11 int `json:"playerScore11"`
+				PlayerScore0  float64 `json:"playerScore0"`
+				PlayerScore1  float64 `json:"playerScore1"`
+				PlayerScore2  float64 `json:"playerScore2"`
+				PlayerScore3  float64 `json:"playerScore3"`
+				PlayerScore4  float64 `json:"playerScore4"`
+				PlayerScore5  float64 `json:"playerScore5"`
+				PlayerScore6  float64 `json:"playerScore6"`
+				PlayerScore7  float64 `json:"playerScore7"`
+				PlayerScore8  float64 `json:"playerScore8"`
+				PlayerScore9  float64 `json:"playerScore9"`
+				PlayerScore10 float64 `json:"playerScore10"`
+				PlayerScore11 float64 `json:"playerScore11"`
 			} `json:"missions"`
 			NeedVisionPings         int `json:"needVisionPings"`
 			NeutralMinionsKilled    int `json:"neutralMinionsKilled"`
